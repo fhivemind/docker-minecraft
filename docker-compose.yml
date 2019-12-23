@@ -32,6 +32,14 @@ services:
       MODE: "survival"
       MOTD: "Eternal Blue, Avenue 23"
     restart: always
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 6000M
+        reservations:
+          cpus: '4'
+          memory: 5500M
   rcon:
     image: itzg/rcon
     container_name: minecraft_rcon
