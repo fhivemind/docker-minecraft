@@ -10,7 +10,7 @@ services:
     ports:
       - "24321:24321"
     volumes:
-      - "mc:/data"
+      - "/var/mc:/data"
     environment:
       EULA: "TRUE"
       CONSOLE: "true"
@@ -48,7 +48,7 @@ services:
       - "4326:4326"
       - "4327:4327"
     volumes:
-      - "rcon:/opt/rcon-web-admin/db"
+      - "/var/rcon:/opt/rcon-web-admin/db"
 
 volumes:
   mc:
