@@ -25,11 +25,12 @@ services:
       MODE: "survival"
       OVERRIDE_SERVER_PROPERTIES: "true"
       # Build config
-      MEMORY: 5G
+      MEMORY: 6G
+      TYPE: PAPER
       ENABLE_COMMAND_BLOCK: "true"
       GENERATE_STRUCTURES: "true"
       MAX_BUILD_HEIGHT: 128
-      VIEW_DISTANCE: 5
+      VIEW_DISTANCE: 8
       # Game config
       ONLINE_MODE: "false"
       ALLOW_NETHER: "true"
@@ -41,11 +42,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 6000M
+          cpus: '2.0'
+          memory: 6500M
         reservations:
-          cpus: '2'
-          memory: 6000M
+          cpus: '2.0'
+          memory: 6500M
   # - RCON config
   rcon:
     image: itzg/rcon
