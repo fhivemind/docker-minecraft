@@ -1,7 +1,6 @@
 version: '3'
-# Other docker-compose examples in /examples
-
 services:
+  # - Minecraft server config
   minecraft:
     build:
       context: .
@@ -12,26 +11,32 @@ services:
     volumes:
       - "/var/mc:/data"
     environment:
+      # Base config
       EULA: "TRUE"
       CONSOLE: "true"
+      # Server config
       ENABLE_RCON: "true"
       RCON_PASSWORD: "testing"
       RCON_PORT: 28016
       SERVER_PORT: 24321
       VERSION: 1.15
+      ICON: "https://images-na.ssl-images-amazon.com/images/I/81eVnOh4UJL._SY355_.jpg"
+      MOTD: "Eternal Blue, Avenue 23"
+      MODE: "survival"
+      OVERRIDE_SERVER_PROPERTIES: "true"
+      # Build config
       MAX_MEMORY: 5G
+      ENABLE_COMMAND_BLOCK: "true"
+      GENERATE_STRUCTURES: "true"
       MAX_BUILD_HEIGHT: 256
       VIEW_DISTANCE: 15
-      OVERRIDE_SERVER_PROPERTIES: "true"
-      OPS: "fhivemind"
-      ICON: "https://images-na.ssl-images-amazon.com/images/I/81eVnOh4UJL._SY355_.jpg"
+      # Game config
+      ONLINE_MODE: "false"
       ALLOW_NETHER: "true"
-      ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
-      ENABLE_COMMAND_BLOCK: "true"
       FORCE_GAMEMODE: "true"
-      GENERATE_STRUCTURES: "true"
-      MODE: "survival"
-      MOTD: "Eternal Blue, Avenue 23"
+      OPS: "fhivemind"
+      ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+    # Configure machine
     restart: always
     deploy:
       resources:
@@ -41,6 +46,7 @@ services:
         reservations:
           cpus: '4'
           memory: 5500M
+  # - RCON config
   rcon:
     image: itzg/rcon
     container_name: minecraft_rcon
@@ -50,6 +56,7 @@ services:
     volumes:
       - "/var/rcon:/opt/rcon-web-admin/db"
 
+# - Volume config
 volumes:
   mc:
   rcon:
