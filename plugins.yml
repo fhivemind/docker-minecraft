@@ -11,3 +11,12 @@ plugins:
   citizens:
     file: Citizens.jar
     url: https://dev.bukkit.org/projects/citizens/files/latest
+  worldBorder:
+    file: WorldBorder.jar
+    url: https://dev.bukkit.org/projects/worldborder/files/latest
+  vault:
+    file: Vault.jar
+    url: https://dev.bukkit.org/projects/vault/files/latest
+  clearlagg:
+    file: Clearlag.jar
+    url: https://dev.bukkit.org/projects/clearlagg/files/latest
