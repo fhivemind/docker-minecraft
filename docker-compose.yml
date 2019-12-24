@@ -19,6 +19,7 @@ services:
       SERVER_PORT: 25565
       VERSION: 1.15
       ICON: "https://images-na.ssl-images-amazon.com/images/I/81eVnOh4UJL._SY355_.jpg"
+      SERVER_NAME: "ChaTea"
       MOTD: "Eternal Blue, Avenue 23"
       MODE: "survival"
       OVERRIDE_SERVER_PROPERTIES: "true"
