@@ -12,7 +12,6 @@ services:
       - "mc:/data"
     environment:
       # Base config
-      PROXY: proxy:3128
       EULA: "TRUE"
       CONSOLE: "false"
       # Server config
@@ -38,9 +37,6 @@ services:
       FORCE_GAMEMODE: "true"
       OPS: "fhivemind"
       ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
-    # Proxy
-    proxy:
-      image: sameersbn/squid
     # Configure machine
     restart: always
     deploy:
