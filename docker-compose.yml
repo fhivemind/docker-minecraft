@@ -2,23 +2,21 @@ version: '3'
 services:
   # - Minecraft server config
   minecraft:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: itzg/minecraft-server
     container_name: minecraft
     ports:
-      - "24321:24321"
+      - "25565:25565"
     volumes:
       - ".:/data"
     environment:
       # Base config
       EULA: "TRUE"
-      CONSOLE: "false"
+      CONSOLE: "true"
       # Server config
       ENABLE_RCON: "true"
       RCON_PASSWORD: "testing"
       RCON_PORT: 28016
-      SERVER_PORT: 24321
+      SERVER_PORT: 25565
       VERSION: 1.15
       ICON: "https://images-na.ssl-images-amazon.com/images/I/81eVnOh4UJL._SY355_.jpg"
       MOTD: "Eternal Blue, Avenue 23"
@@ -26,7 +24,7 @@ services:
       OVERRIDE_SERVER_PROPERTIES: "true"
       # Build config
       MEMORY: 6G
-      TYPE: SPIGOT
+      TYPE: PAPER
       ENABLE_COMMAND_BLOCK: "true"
       GENERATE_STRUCTURES: "true"
       MAX_BUILD_HEIGHT: 128
@@ -37,6 +35,7 @@ services:
       FORCE_GAMEMODE: "true"
       OPS: "fhivemind"
       ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+    command: --noconsole
     # Configure machine
     restart: always
     deploy:
@@ -55,4 +54,8 @@ services:
       - "4326:4326"
       - "4327:4327"
     volumes:
-      - ".:/opt/rcon-web-admin/db"
+      - "rcon:/opt/rcon-web-admin/db"
+
+volumes:
+  mc:
+  rcon:
