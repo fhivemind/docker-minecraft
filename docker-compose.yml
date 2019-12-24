@@ -9,9 +9,10 @@ services:
     ports:
       - "24321:24321"
     volumes:
-      - "/var/mc:/data"
+      - "mc:/data"
     environment:
       # Base config
+      PROXY: proxy:3128
       EULA: "TRUE"
       CONSOLE: "false"
       # Server config
@@ -37,6 +38,9 @@ services:
       FORCE_GAMEMODE: "true"
       OPS: "fhivemind"
       ANNOUNCE_PLAYER_ACHIEVEMENTS: "true"
+    # Proxy
+    proxy:
+      image: sameersbn/squid
     # Configure machine
     restart: always
     deploy:
@@ -55,7 +59,7 @@ services:
       - "4326:4326"
       - "4327:4327"
     volumes:
-      - "/var/rcon:/opt/rcon-web-admin/db"
+      - "rcon:/opt/rcon-web-admin/db"
 
 # - Volume config
 volumes:
