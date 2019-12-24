@@ -13,21 +13,21 @@ latest snapshot. See the *Versions* section below for more information.
 
 To simply use the latest stable version, run
 
-    docker run -d -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -p 24321:24321 --name mc itzg/minecraft-server
 
-where the standard server port, 25565, will be exposed on your host machine.
+where the standard server port, 24321, will be exposed on your host machine.
 
 If you want to serve up multiple Minecraft servers or just use an alternate port,
 change the host-side port mapping such as
 
-    docker run -p 25566:25565 ...
+    docker run -p 25566:24321 ...
 
 will serve your Minecraft server on your host's port 25566 since the `-p` syntax is
 `host-port`:`container-port`.
 
 Speaking of multiple servers, it's handy to give your containers explicit names using `--name`, such as
 
-    docker run -d -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -p 24321:24321 --name mc itzg/minecraft-server
 
 With that you can easily view the logs, stop, or re-start the container:
 
@@ -67,7 +67,7 @@ _The `-i` is not needed in this case._
 
 In order to attach and interact with the Minecraft server, add `-it` when starting the container, such as
 
-    docker run -d -it -p 25565:25565 --name mc itzg/minecraft-server
+    docker run -d -it -p 24321:24321 --name mc itzg/minecraft-server
 
 With that you can attach and interact at any time using
 
@@ -90,7 +90,7 @@ Mojang now requires accepting the [Minecraft EULA](https://account.mojang.com/do
 
 such as
 
-        docker run -d -it -e EULA=TRUE -p 25565:25565 --name mc itzg/minecraft-server
+        docker run -d -it -e EULA=TRUE -p 24321:24321 --name mc itzg/minecraft-server
 
 ## Attaching data directory to host filesystem
 
@@ -126,7 +126,7 @@ from the `STATUS` column of `docker ps`
 
 ```
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                    PORTS                                 NAMES
-b418af073764        mc                  "/start"            43 seconds ago      Up 41 seconds (healthy)   0.0.0.0:25565->25565/tcp, 25575/tcp   mc
+b418af073764        mc                  "/start"            43 seconds ago      Up 41 seconds (healthy)   0.0.0.0:24321->24321/tcp, 25575/tcp   mc
 ```
 
 You can also query the container's health in a script friendly way:
@@ -154,7 +154,7 @@ but you can also choose to run a specific version with `-e FORGEVERSION=10.13.4.
 
     $ docker run -d -v /path/on/host:/data -e VERSION=1.7.10 \
         -e TYPE=FORGE -e FORGEVERSION=10.13.4.1448 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 To use a pre-downloaded Forge installer, place it in the attached `/data` directory and
 specify the name of the installer file with `FORGE_INSTALLER`, such as:
@@ -263,7 +263,7 @@ services:
   minecraft:
     image: itzg/minecraft-server
     ports:
-      - "25565:25565"
+      - "24321:24321"
     volumes:
       - "mc:/data"
     environment:
@@ -299,7 +299,7 @@ Enable Bukkit/Spigot server mode by adding a `-e TYPE=BUKKIT -e VERSION=1.8` or 
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=SPIGOT -e VERSION=1.8 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 If you are hosting your own copy of Bukkit/Spigot you can override the download URLs with:
 * -e BUKKIT_DOWNLOAD_URL=<url>
@@ -312,7 +312,7 @@ pass `--noconsole` at the very end of the command line and not use `-it`. For ex
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=SPIGOT -e VERSION=1.8 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
 
 
 You can install Bukkit plugins in two ways...
@@ -370,14 +370,14 @@ Enable PaperSpigot server mode by adding a `-e TYPE=PAPER -e VERSION=1.9.4` to y
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=PAPER -e VERSION=1.9.4 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 __NOTE: to avoid pegging the CPU when running PaperSpigot,__ you will need to
 pass `--noconsole` at the very end of the command line and not use `-it`. For example,
 
     docker run -d -v /path/on/host:/data \
         -e TYPE=PAPER -e VERSION=1.9.4 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server --noconsole
 
 If you are hosting your own copy of PaperSpigot you can override the download URL with:
 * -e PAPER_DOWNLOAD_URL=<url>
@@ -443,7 +443,7 @@ Now you can add a `-e FTB_SERVER_MOD=name_of_modpack.zip` to your command-line.
 
     docker run -d -v /path/on/host:/data -e TYPE=FTB \
         -e FTB_SERVER_MOD=FTBPresentsSkyfactory3Server_3.0.6.zip \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 Instead of pre-downloading a modpack from the FTB/CurseForge site, you
 can you set `FTB_SERVER_MOD` (or `CF_SERVER_MOD`) to the **server** URL of a modpack, such as
@@ -478,7 +478,7 @@ with `FTB_SERVER_MOD` specifying the updated modpack file.
 
     $ docker run -d -v /path/on/host:/data -e TYPE=FTB \
         -e FTB_SERVER_MOD=FTBPresentsSkyfactory3Server_3.0.7.zip \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 ### Fixing "unable to launch forgemodloader"
 
@@ -518,7 +518,7 @@ $ docker run -itd --name derpcraft \
   -e VERSION=1.12.2\
   -e TYPE=CURSEFORGE\
   -e CF_SERVER_MOD=https://minecraft.curseforge.com/projects/your_amazing_modpack/files/2670435/download\
-  -p 25565:25565\
+  -p 24321:24321\
   -e EULA=TRUE\
   --restart=always\
   itzg/minecraft-server
@@ -533,7 +533,7 @@ By default the container will run the latest `STABLE` version.
 If you want to run a specific version, you can add `-e SPONGEVERSION=1.11.2-6.1.0-BETA-19` to your command-line.
 
     docker run -d -v /path/on/host:/data -e TYPE=SPONGEVANILLA \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 You can also choose to use the `EXPERIMENTAL` branch.
 Just change it with `SPONGEBRANCH`, such as:
@@ -549,7 +549,7 @@ but you can also choose to run a specific version with `-e FABRICVERSION=0.5.0.3
 
     $ docker run -d -v /path/on/host:/data -e VERSION=1.14.3 \
         -e TYPE=FABRIC -e FABRICVERSION=0.5.0.32 \
-        -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+        -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 
 To use a pre-downloaded Fabric installer, place it in the attached `/data` directory and
 specify the name of the installer file with `FABRIC_INSTALLER`, such as:
@@ -627,7 +627,7 @@ For example, with PaperSpigot, it would look something like this:
 ```
 docker run -d -v /path/on/host:/data \
     -e TYPE=PAPER -e VERSION=1.14.1 -e FORCE_REDOWNLOAD=true \
-    -p 25565:25565 -e EULA=TRUE --name mc itzg/minecraft-server
+    -p 24321:24321 -e EULA=TRUE --name mc itzg/minecraft-server
 ```
 
 ## Using Docker Compose
@@ -640,7 +640,7 @@ every time you want to create new Minecraft server, you can now use
 ```
 minecraft-server:
   ports:
-    - "25565:25565"
+    - "24321:24321"
 
   environment:
     EULA: "TRUE"
@@ -686,7 +686,7 @@ The server name (e.g. for bungeecord) can be set like:
 
 The server port can be set like:
 
-    docker run -d -e SERVER_PORT=25565 ...
+    docker run -d -e SERVER_PORT=24321 ...
 
 ### Difficulty
 
@@ -729,7 +729,7 @@ By default rcon port will be `25575` but can easily be changed with the `RCON_PO
 ### Query
 
 Enabling this will enable the gamespy query protocol.
-By default the query port will be `25565` (UDP) but can easily be changed with the `QUERY_PORT` variable.
+By default the query port will be `24321` (UDP) but can easily be changed with the `QUERY_PORT` variable.
 
     docker run -d -e ENABLE_QUERY=true
 
