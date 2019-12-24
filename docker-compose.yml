@@ -13,7 +13,7 @@ services:
     environment:
       # Base config
       EULA: "TRUE"
-      CONSOLE: "true"
+      CONSOLE: "false"
       # Server config
       ENABLE_RCON: "true"
       RCON_PASSWORD: "testing"
