@@ -11,7 +11,7 @@ services:
     environment:
       # Base config
       EULA: "TRUE"
-      CONSOLE: "true"
+      CONSOLE: "false"
       # Server config
       ENABLE_RCON: "true"
       RCON_PASSWORD: "testing"
@@ -24,7 +24,7 @@ services:
       OVERRIDE_SERVER_PROPERTIES: "true"
       # Build config
       MEMORY: 6G
-      TYPE: PAPER
+      TYPE: SPIGOT
       ENABLE_COMMAND_BLOCK: "true"
       GENERATE_STRUCTURES: "true"
       MAX_BUILD_HEIGHT: 128
