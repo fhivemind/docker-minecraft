@@ -18,7 +18,6 @@ services:
       RCON_PASSWORD: "testing"
       RCON_PORT: 28016
       SERVER_PORT: 25565
-      SERVER_IP: 35.240.177.165
       VERSION: 1.15
       MAX_MEMORY: 5G
       MAX_BUILD_HEIGHT: 256
